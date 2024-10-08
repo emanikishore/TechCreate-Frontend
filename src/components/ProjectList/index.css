@@ -1,0 +1,138 @@
+/* General Styling for Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: grey;
+  color: white;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 80px;
+  height: auto;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-menu li {
+  display: inline;
+}
+
+.navbar-menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar-menu a:hover {
+  color: #f9a825;
+}
+
+/* Navbar toggle (hamburger icon) */
+.navbar-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Hide menu initially on small screens */
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    z-index: 1000;
+  }
+
+  .navbar-toggle {
+    display: block; /* Show hamburger icon */
+  }
+
+  .navbar-menu.open {
+    display: flex; /* Show menu when the toggle button is clicked */
+  }
+}
+
+/* Container for the project cards */
+.project-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  gap: 15px; /* Adds space between cards */
+}
+
+.project-card {
+  width: 100%; /* Full width for mobile devices */
+  max-width: 400px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px); /* Hover effect */
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.project-title {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+.project-description {
+  font-size: 1em;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .project-title {
+    font-size: 1.3em;
+  }
+
+  .project-description {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-title {
+    font-size: 1.2em;
+  }
+
+  .project-description {
+    font-size: 0.8em;
+  }
+}
