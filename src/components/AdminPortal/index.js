@@ -23,7 +23,7 @@ const AdminPortal = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/projects');
+        const response = await axios.get('https://techcreate-backend-1.onrender.com/projects');
         setProjects(response.data);
       } catch (error) {
         console.error('Error fetching projects:', error);
