@@ -19,7 +19,7 @@ const AdminPortal = () => {
     }
   }, [navigate]);
 
-  // Fetch existing projects
+  // Fetch existing projects from the deployed backend
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -37,39 +37,53 @@ const AdminPortal = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Add new project
+  // Add or update a project
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isEdit) {
-        await axios.put(`http://localhost:5000/projects/${editId}`, form);
+        // Update project
+        await axios.put(`https://techcreate-backend-1.onrender.com/projects/${editId}`, form);
       } else {
-        await axios.post('http://localhost:5000/projects', form);
+        // Add new project
+        await axios.post('https://techcreate-backend-1.onrender.com/projects', form);
       }
       setForm({ title: '', description: '', imageUrl: '' });
       setIsEdit(false);
       setEditId(null);
-      window.location.reload(); // Refresh after operation
+      // Refresh the project list without reloading the page
+      fetchProjects();
     } catch (error) {
       console.error('Error adding/updating project:', error);
     }
   };
 
-  // Delete project
+  // Delete a project
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/projects/${id}`);
-      window.location.reload();
+      await axios.delete(`https://techcreate-backend-1.onrender.com/projects/${id}`);
+      // Refresh the project list without reloading the page
+      fetchProjects();
     } catch (error) {
       console.error('Error deleting project:', error);
     }
   };
 
-  // Edit project
+  // Edit a project
   const handleEdit = (project) => {
     setForm({ title: project.title, description: project.description, imageUrl: project.imageUrl });
     setIsEdit(true);
     setEditId(project._id);
+  };
+
+  // Fetch projects after any add, edit or delete operation
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get('https://techcreate-backend-1.onrender.com/projects');
+      setProjects(response.data);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    }
   };
 
   return (
